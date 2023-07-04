@@ -7,7 +7,7 @@ const Login = () => {
         <form>
           <div
             className="row justify-content-center align-items-center mb-1"
-            style={{ height: "100vh" }}
+            style={{ height: "100 vh" }}
           >
             <div className="col-sm-12 col-md-6 shadow shadow-lg bg-white rounded p-5 mb-5">
               <div className="row justify-content-center">
@@ -41,13 +41,20 @@ const Login = () => {
                     placeholder="Enter Password"
                     className="form-control mb-1"
                   />
-                  <p id="passwordError" style={{ color: "red", display: "none" }}>
+                  <p
+                    id="passwordError"
+                    style={{ color: "red", display: "none" }}
+                  >
                     Invalid password
                   </p>
                 </div>
                 <div>
                   <div style={{ marginBottom: 10 }}>
-                    <input type="checkbox" name="Remember Me" id="Remember Me" />
+                    <input
+                      type="checkbox"
+                      name="Remember Me"
+                      id="Remember Me"
+                    />
                     <label htmlFor="Remember Me">Remember Me</label>
                   </div>
                   <div style={{ marginTop: 10 }}>
@@ -60,8 +67,7 @@ const Login = () => {
                       <a
                         href="#"
                         style={{ marginBottom: 10, textDecoration: "none" }}
-                      >
-                      </a>
+                      ></a>
                       <a
                         href="Registration.html"
                         style={{ marginBottom: 10, textDecoration: "none" }}
