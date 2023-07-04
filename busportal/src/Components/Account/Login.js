@@ -17,7 +17,7 @@ const Login = () => {
                 >
                   <p
                     style={{
-                      fontSize: 100,
+                      fontSize: 50,
                       fontWeight: "bolder",
                       color: "rgb(220, 58, 58)",
                     }}
