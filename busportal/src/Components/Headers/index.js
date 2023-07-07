@@ -54,6 +54,11 @@ const Headers = () => {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link mx-2 text-uppercase" to="/instructions">
+                  Instructions
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link mx-2 text-uppercase" to="/register">
                   Register
                 </Link>

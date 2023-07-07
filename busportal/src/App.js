@@ -13,6 +13,7 @@ import DriverDetails from "./Components/BusDriver/DriverDetails";
 import StudentDetails from "./Components/StudentDetails";
 import ContactUs from "./Components/ContactUs";
 import AboutUs from "./Components/AboutUs";
+import { Instrctions } from "./Components/Instructions";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/studentdetails" element={<StudentDetails />}></Route>
         <Route path="/ContactUs" element={<ContactUs />}></Route>
         <Route path="/AboutUs" element={<AboutUs />}></Route>
+        <Route path="/instructions" element={<Instrctions/>}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
