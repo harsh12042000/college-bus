@@ -7,7 +7,7 @@ export const Footer = () => {
       <footer className="text-center text-lg-start bg-white text-muted mb-0">
         <div className="footer-bus-animation">
           <img
-            src="https://www.shutterstock.com/image-vector/school-bus-vector-illustration-isolated-600w-571415128.jpg"
+            src={process.env.PUBLIC_URL + '/assets/images/footer-bus.jpeg'}
             alt="Bus"
             className="footer-bus-image"
           />
@@ -74,7 +74,7 @@ export const Footer = () => {
         <div className="footer-overlay"></div>
         <div
           className="text-center p-4"
-          style={{ backgroundColor: "#d84c54" }}
+          style={{ backgroundColor: "#ffb404" }}
         >
           © 2021 Bus Portal
         </div>

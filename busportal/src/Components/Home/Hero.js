@@ -7,8 +7,8 @@ const Hero = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-        //   src={process.env.PUBLIC_URL + '/assets/images/banner-01.jpg'}
-            src= "https://sunvalleyncr.in/images/SVIS-14.jpg"
+          src={process.env.PUBLIC_URL + '/assets/images/banner-01.jpg'}
+            // src= "https://sunvalleyncr.in/images/SVIS-14.jpg"
           alt="bus1"
         />
         <Carousel.Caption>

@@ -14,7 +14,7 @@ const Emergency = () => {
               you.
             </p>
             <img
-              src="https://i.pinimg.com/originals/bc/58/83/bc58833a4dbf83f0c9fcf52cf8bbad1a.gif"
+              src={process.env.PUBLIC_URL + '/assets/images/alert.png'}
               alt="Emergency Image"
               class="emergency-image"
             ></img>

@@ -4,12 +4,21 @@ import { Link } from "react-router-dom";
 const Headers = () => {
   return (
     <>
-    <nav className="navbar navbar-expand-lg sticky-top navbar-light p-3 shadow-sm" style={{background: "#d84c54"}}>
+      <nav
+        className="navbar navbar-expand-lg sticky-top navbar-light p-3 shadow-sm"
+        style={{ background: "#ffffff" }}
+      >
         <div className="container">
           <a className="navbar-brand" href="#">
-            <i className="fa-solid fa-shop me-2" />{" "}
+            {/* <i className="fa-solid fa-shop me-2" />{" "} */}
             <strong>
-              <Link to="/">Bus Portal</Link>
+              <Link to="/">
+                <img
+                  className="logo-img"
+                  src={process.env.PUBLIC_URL + "/assets/images/logo.png"}
+                  alt="Banner"
+                />
+              </Link>
             </strong>
           </a>
           <button
@@ -80,8 +89,8 @@ const Headers = () => {
           </div>
         </div>
       </nav>
-  </>
+    </>
   );
-}
+};
 
 export default Headers;
