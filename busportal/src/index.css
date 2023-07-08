@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to bottom, rgba(186, 18, 79, 0), rgb(208, 87, 87));
 }
 
 code {
@@ -80,6 +81,7 @@ code {
   width: 220px;
 }
 
+
 @keyframes moveBus {
   0% {
     left: 100%;
@@ -107,7 +109,6 @@ code {
   background: linear-gradient(to top, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
 }
 */
-
 .section_our_solution .row {
   align-items: center;
 }
@@ -207,8 +208,6 @@ code {
   margin-bottom: 1rem;
   font-size: 2.5rem;
 }
-.our_solution_content p {
-}
 
 .hover_color_bubble {
   position: absolute;
@@ -276,4 +275,8 @@ code {
     width: 50%;
     margin: 0 auto;
   }
+}
+
+.nav-item:hover {  
+  border-bottom: 2px solid black;
 }

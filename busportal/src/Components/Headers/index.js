@@ -5,17 +5,17 @@ const Headers = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg sticky-top navbar-light p-3 shadow-sm"
+        className="navbar navbar-expand-lg sticky-top navbar-light p-1 shadow-lg bg-danger"
         style={{ background: "#ffffff" }}
       >
-        <div className="container">
+        <div className="container-fluid justify-content-between">
           <a className="navbar-brand" href="#">
             {/* <i className="fa-solid fa-shop me-2" />{" "} */}
             <strong>
               <Link to="/">
                 <img
                   className="logo-img"
-                  src={process.env.PUBLIC_URL + "/assets/images/logo.png"}
+                  src={process.env.PUBLIC_URL + "/assets/images/C-DAC.png"}
                   alt="Banner"
                 />
               </Link>
@@ -33,10 +33,10 @@ const Headers = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className=" collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav ms-auto ">
+            <ul className="navbar-nav ms-auto justify-content-center align-items-center ">
               <li className="nav-item">
                 <Link
-                  className="nav-link mx-2 text-uppercase active"
+                  className="nav-link mx-2 text-uppercase active text-white"
                   aria-current="page"
                   to="/"
                 >
@@ -44,27 +44,27 @@ const Headers = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase" to="/aboutus">
+                <Link className="nav-link mx-2 text-uppercase text-white" to="/aboutus">
                   About Us
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase" to="/contactus">
+                <Link className="nav-link mx-2 text-uppercase text-white" to="/contactus">
                   Contact Us
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase" to="/instructions">
+                <Link className="nav-link mx-2 text-uppercase text-white" to="/instructions">
                   Instructions
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase" to="/register">
+                <Link className="nav-link mx-2 text-uppercase text-white" to="/register">
                   Register
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase" to="/login">
+                <Link className="nav-link mx-2 text-uppercase text-white" to="/login">
                   Login
                 </Link>
               </li>
