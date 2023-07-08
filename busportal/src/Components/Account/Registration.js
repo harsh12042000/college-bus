@@ -26,7 +26,7 @@ export const Registration = () => {
     setprnErr("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     if (username == "") {
       setUsernameErr("**Name field should not be empty");
@@ -76,6 +76,25 @@ export const Registration = () => {
     setContactNumber = "";
     setUsername = "";
     setprn = "";
+
+    // try {
+    //   const response = await axios.post("YOUR_API_ENDPOINT", {
+    //     username,
+    //     prn,
+    //     contactNumber,
+    //     // Include other data to send to the API
+    //   });
+
+    //   console.log(response.data); 
+  
+    //   // Reset form fields
+    //   setContactNumber("");
+    //   setUsername("");
+    //   setprn("");
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
   };
   return (
     <>
@@ -174,7 +193,7 @@ export const Registration = () => {
                     <input
                       type="tel"
                       id="phone-input"
-                      name="number"
+                      name="contactNumber"
                       placeholder="Enter your number"
                       className="form-control form-control-lg"
                       onChange={handleContactNumberChange}
