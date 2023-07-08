@@ -4,7 +4,7 @@ const Emergency = () => {
   return (
     <div className="container">
       <div className="row">
-        <div class="emergency-section" style={{margin: "3% 0 4% 0"}}>
+        <div class="emergency-section shadow-lg rounded p-5 mb-5 bg-white " style={{margin: "3% 0 4% 0"}}>
           <div className="emergency-content">
             <h3 className="emergency-title">In Case of Emergency, Call Us</h3>
             <p className="emergency-phone">Emergency Phone: 123-456-7890</p>
