@@ -5,7 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to bottom, rgb(225, 171, 185), rgb(206, 60, 84));
+  background-image: url(./Components/Background1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {
@@ -127,8 +129,8 @@ code {
 .solution_cards_box .solution_card {
   flex: 0 50%;
   background: #fff;
-  box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
-    0 5px 15px 0 rgba(37, 44, 97, 0.15);
+  box-shadow: 0 2px 4px 0 rgba(195, 136, 154, 0.2),
+    0 5px 15px 0 rgba(97, 37, 69, 0.15);
   border-radius: 15px;
   margin: 20px;
   padding: 10px 15px;
@@ -140,14 +142,14 @@ code {
 }
 
 .solution_cards_box .solution_card:hover {
-  background: #309df0;
+  background: #f03083;
   color: #fff;
   transform: scale(1.1);
   z-index: 9;
 }
 
 .solution_cards_box .solution_card:hover::before {
-  background: rgb(85 108 214 / 10%);
+  background: rgba(214, 85, 145, 0.1);
 }
 
 .solution_cards_box .solution_card:hover .solu_title h3,
@@ -158,7 +160,7 @@ code {
 .solution_cards_box .solution_card:before {
   content: "";
   position: absolute;
-  background: rgb(85 108 214 / 5%);
+  background: rgba(214, 85, 175, 0.05);
   width: 170px;
   height: 400px;
   z-index: -1;
@@ -170,7 +172,7 @@ code {
 
 .solution_cards_box .solution_card:hover .solu_description button {
   background: #fff !important;
-  color: #309df0;
+  color: #f03073;
 }
 
 .solution_card .so_top_icon {
@@ -193,9 +195,9 @@ code {
   border-radius: 15px;
   background: linear-gradient(
     140deg,
-    #42c3ca 0%,
-    #42c3ca 50%,
-    #42c3cac7 75%
+    #ca427f 0%,
+    #bc54a6 50%,
+    #ca4291c7 75%
   ) !important;
   color: #fff;
   font-weight: 500;
@@ -279,4 +281,18 @@ code {
 
 .nav-item:hover {  
   border-bottom: 2px solid black;
+}
+
+#cards :hover {
+  -webkit-transform: scale(1.04);
+  transform: scale(1.04);
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  -o-transform: scale(1.04);
+  /* color: whitesmoke; */
+  transform: translateY(-0.5%);
+  box-shadow: 0 4rem 8rem rgba(95, 24, 49, 0.5);
+  /* background-color: grey; */
+  cursor: pointer;
 }
