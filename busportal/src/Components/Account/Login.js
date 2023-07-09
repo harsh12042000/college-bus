@@ -61,7 +61,7 @@ const Login = () => {
         window.location.href = "/admindashboard";
       } else if(response.data.checkAdmin === 0){
         // navigate(redirect || '/');
-        window.location.href = "/";
+        window.location.href = "/details";
       } else {
         alert("Sorry...Please Check Details!")
       }

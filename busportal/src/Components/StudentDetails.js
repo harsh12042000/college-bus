@@ -6,19 +6,29 @@ const StudentDetails = () => {
   const [studentData, setStudentData] = useState([]);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  useEffect(() => {
-    const fetchStudentDetails = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:9091/student-details"
-        );
-        setStudentData(response.data);
-      } catch (error) {
-        console.log(error);
-        alert("Error occurred while fetching student details");
-      }
-    };
+  const deleteHandler = async (studentId) => {
+    try {
+      await axios.delete(`http://localhost:9091/delete-student?student_id=${studentId}`);
+      fetchStudentDetails();
+    } catch (error) {
+      alert("Console Error");
+      console.log(error);
+    }
+  };
 
+  // alert(userInfo.student_id);
+  
+  const fetchStudentDetails = async () => {
+    try {
+      const response = await axios.get("http://localhost:9091/student-details");
+      setStudentData(response.data);
+    } catch (error) {
+      console.log(error);
+      alert("Error occurred while fetching student details");
+    }
+  };
+
+  useEffect(() => {
     fetchStudentDetails();
   }, []);
 
@@ -31,33 +41,72 @@ const StudentDetails = () => {
         <table className="table">
           <thead>
             <tr>
+              <th scope="col">Student ID</th>
               <th scope="col">PRN</th>
               <th scope="col">Name</th>
               <th scope="col">Contact Number</th>
               <th scope="col">Standard</th>
-              <th scope="col">Bus ID</th>
+              {/* <th scope="col">Bus ID</th> */}
               <th scope="col">Fee Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {studentData.map((student) =>
-              student.checkAdmin === 0 ? (
-                <tr key={student.student_id}>
-                  <td>{student.prn}</td>
-                  <td>{student.userName}</td>
-                  <td>{student.contactNumber}</td>
-                  <td>{student.standard}</td>
-                  <td>{student.bus.bus_id}</td>
-                  <td>
-                    {student.feeStatus === 0 ? (
-                      <span className="badge bg-danger">Not Paid</span>
-                    ) : (
-                      <span className="badge bg-success">Paid</span>
-                    )}
-                  </td>
-                </tr>
-              ) : null
-            )}
+            {studentData.map((student) => {
+              if (student) {
+                if (userInfo.checkAdmin === 1) {
+                  return (
+                    <tr key={student.student_id}>
+                      <td>{student.student_id}</td>
+                      <td>{student.prn}</td>
+                      <td>{student.userName}</td>
+                      <td>{student.contactNumber}</td>
+                      <td>{student.standard}</td>
+                      {/* <td>{student.bus.bus_id}</td> */}
+                      <td>
+                        {student.feeStatus === 0 ? (
+                          <span className="badge bg-danger">Not Paid</span>
+                        ) : (
+                          <span className="badge bg-success">Paid</span>
+                        )}
+                      </td>
+                      <td>
+                        <button className="btn btn-danger" onClick={() => deleteHandler(student.student_id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                }
+                if (student.student_id === userInfo.student_id) {
+                  return (
+                    <tr key={student.student_id}>
+                      <td>{student.student_id}</td>
+                      <td>{student.prn}</td>
+                      <td>{student.userName}</td>
+                      <td>{student.contactNumber}</td>
+                      <td>{student.standard}</td>
+                      {/* <td>{student.bus.bus_id}</td> */}
+                      <td>
+                        {student.feeStatus === 0 ? (
+                          <span className="badge bg-danger">Not Paid</span>
+                        ) : (
+                          <span className="badge bg-success">Paid</span>
+                        )}
+                      </td>
+                      <td>
+                        {
+                          (student.bus && student.bus.bus_id) ? 
+                          <p>Bus Registered</p> :
+                          <p>Not Yet Registered</p>
+                        }
+                      </td>
+                    </tr>
+                  );
+                }
+              }
+              return null;
+            })}
           </tbody>
         </table>
       </div>

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
 const BusDetails = () => {
   const [busData, setBusData] = useState([]);
   const [editBus, setEditBus] = useState(null);
@@ -111,15 +113,40 @@ const BusDetails = () => {
                   <td>{bus.source}</td>
                   <td>{bus.fees}</td>
                   <td>
-                    <button
-                      onClick={() => handleEdit(bus)}
-                      className="btn btn-link"
-                    >
-                      <i
-                        className="fas fa-edit fa-lg text-center me-3"
-                        style={{ color: "red" }}
-                      ></i>
-                    </button>
+                    {userInfo.checkAdmin !== null &&
+                    userInfo.checkAdmin === 1 ? (
+                      <button
+                        onClick={() => handleEdit(bus)}
+                        className="btn btn-link"
+                      >
+                        <i
+                          className="fas fa-edit fa-lg text-center me-3"
+                          style={{ color: "red" }}
+                        ></i>
+                      </button>
+                    ) : (
+                      <>
+                        {userInfo.busId !== null ? (
+                          <button disabled={true}>Already Booked</button>
+                        ) : (
+                          <button>
+                            <Link
+                              to={`/booking?bus_id=${
+                                bus.bus_id
+                              }&vehicleNumber=${encodeURIComponent(
+                                bus.vehicleNumber
+                              )}&seatCapacity=${encodeURIComponent(
+                                bus.seatCapacity
+                              )}&source=${encodeURIComponent(
+                                bus.source
+                              )}&fees=${encodeURIComponent(bus.fees)}`}
+                            >
+                              Book Now
+                            </Link>
+                          </button>
+                        )}
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -144,9 +171,7 @@ const BusDetails = () => {
               <div className="modal-body">
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label className="form-label">
-                      ID
-                    </label>
+                    <label className="form-label">ID</label>
                     <input
                       type="text"
                       className="form-control"
