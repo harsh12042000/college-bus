@@ -4,22 +4,25 @@ import { Link } from "react-router-dom";
 
 const DriverDetails = () => {
   const [driverData, setDriverData] = useState([]);
-  const [editDriver, setEditDriver] = useState(null); // Driver object being edited
+  const [editDriver, setEditDriver] = useState(null);
   const [formValues, setFormValues] = useState({
     driverName: "",
     driverNumber: "",
     license: "",
     driverAge: "",
     busId: "",
-    assignedArea: ""
+    assignedArea: "",
   });
+  const [showModal, setShowModal] = useState(false);
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     const fetchBusDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:9091/driver-details");
+        const response = await axios.get(
+          "http://localhost:9091/driver-details"
+        );
         setDriverData(response.data);
       } catch (error) {
         alert("Console Error");
@@ -30,49 +33,60 @@ const DriverDetails = () => {
     fetchBusDetails();
   }, []);
 
-  // Function to handle edit button click
   const handleEdit = (driver) => {
     setEditDriver(driver);
     setFormValues({
+      driver_id: driver.driver_id,
       driverName: driver.driverName,
       driverNumber: driver.driverNumber,
       license: driver.license,
       driverAge: driver.driverAge,
       busId: driver.bus.bus_id,
-      assignedArea: driver.bus.source
+      assignedArea: driver.bus.source,
     });
+    setShowModal(true);
   };
 
-  // Function to handle form field changes
   const handleInputChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  // Function to handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call API to update the driver record
-      const response = await axios.put(
-        `http://localhost:9091/update-driver/${editDriver.driver_id}`,
-        formValues
+      const updatedData = {
+        driver_id: formValues.driver_id,
+        driverName: formValues.driverName,
+        driverNumber: formValues.driverNumber,
+        license: formValues.license,
+        driverAge: formValues.driverAge,
+        bus: {
+          bus_id: formValues.busId,
+        },
+      };
+
+      const response = await axios.post(
+        "http://localhost:9091/update-driver",
+        updatedData
       );
-      // Update the driverData state with the updated driver record
-      setDriverData((prevData) =>
-        prevData.map((driver) =>
-          driver.driver_id === editDriver.driver_id ? response.data : driver
-        )
-      );
-      // Reset the editDriver and formValues states
-      setEditDriver(null);
-      setFormValues({
-        driverName: "",
-        driverNumber: "",
-        license: "",
-        driverAge: "",
-        busId: "",
-        assignedArea: ""
-      });
+      window.location.href = "/driverdetails"
+      // setDriverData((prevData) =>
+      //   prevData.map((driver) =>
+      //     driver.driver_id === editDriver.driver_id ? response.data : driver
+      //   )
+      // );
+
+      // setEditDriver(null);
+      // setFormValues({
+      //   driver_id: "",
+      //   driverName: "",
+      //   driverNumber: "",
+      //   license: "",
+      //   driverAge: "",
+      //   busId: "",
+      //   assignedArea: "",
+      // });
+      // setShowModal(false);
     } catch (error) {
       alert("Console Error");
       console.log(error);
@@ -128,81 +142,95 @@ const DriverDetails = () => {
       </div>
 
       {/* Form Modal */}
-      {editDriver && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Edit Driver</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="driverName">Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="driverName"
-                  name="driverName"
-                  value={formValues.driverName}
-                  onChange={handleInputChange}
-                />
+      {showModal && (
+        <div className="modal" style={{ display: "block" }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Driver</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowModal(false)}
+                ></button>
               </div>
-              <div className="form-group">
-                <label htmlFor="driverNumber">Contact Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="driverNumber"
-                  name="driverNumber"
-                  value={formValues.driverNumber}
-                  onChange={handleInputChange}
-                />
+              <div className="modal-body">
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label className="form-label">ID</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="driver_id"
+                      name="driver_id"
+                      value={formValues.driver_id}
+                      disabled
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="driverName"
+                      name="driverName"
+                      value={formValues.driverName}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Contact Number</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="driverNumber"
+                      name="driverNumber"
+                      value={formValues.driverNumber}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">License</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="license"
+                      name="license"
+                      value={formValues.license}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  
+                  <div className="mb-3">
+                    <label className="form-label">Age</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="age"
+                      name="age"
+                      value={formValues.driverAge}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="driverName" className="form-label">
+                      Assigned Bus ID :
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="busId"
+                      name="busId"
+                      value={formValues.busId}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
               </div>
-              <div className="form-group">
-                <label htmlFor="license">License</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="license"
-                  name="license"
-                  value={formValues.license}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="driverAge">Age</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="driverAge"
-                  name="driverAge"
-                  value={formValues.driverAge}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="busId">Bus ID</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="busId"
-                  name="busId"
-                  value={formValues.busId}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="assignedArea">Assigned Area</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="assignedArea"
-                  name="assignedArea"
-                  value={formValues.assignedArea}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       )}
