@@ -17,6 +17,7 @@ const Headers = () => {
                   className="logo-img"
                   src={process.env.PUBLIC_URL + "/assets/images/C-DAC.png"}
                   alt="Banner"
+                  style={{height:"7vh", width:"6vw"}}
                 />
               </Link>
             </strong>

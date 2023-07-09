@@ -26,7 +26,7 @@ export const Registration = () => {
     setprnErr("");
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (username == "") {
       setUsernameErr("**Name field should not be empty");
@@ -76,25 +76,6 @@ export const Registration = () => {
     setContactNumber = "";
     setUsername = "";
     setprn = "";
-
-    // try {
-    //   const response = await axios.post("YOUR_API_ENDPOINT", {
-    //     username,
-    //     prn,
-    //     contactNumber,
-    //     // Include other data to send to the API
-    //   });
-
-    //   console.log(response.data); 
-  
-    //   // Reset form fields
-    //   setContactNumber("");
-    //   setUsername("");
-    //   setprn("");
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
   };
   return (
     <>
@@ -103,7 +84,7 @@ export const Registration = () => {
           className="account-pages row d-flex flex-column justify-content-center align-items-center mt-5"
           style={{ height: "100vh" }}
         >
-          <div className="shadow p-5 mb-5 bg-white rounded col-sm-12 col-md-6">
+          <div className="shadow p-5 mb-5 bg-white rounded rounded col-sm-12 col-md-6">
             <h1 className="text-danger" style={{ marginLeft: "30%" }}>
               REGISTRATION
             </h1>
@@ -159,7 +140,7 @@ export const Registration = () => {
                       name="password"
                       placeholder="Enter your password"
                       className="form-control form-control-lg"
-                    //onChange={handlePasswordChange}
+                      //onChange={handlePasswordChange}
                     />
                     <div
                       id="passwordError"
@@ -193,7 +174,7 @@ export const Registration = () => {
                     <input
                       type="tel"
                       id="phone-input"
-                      name="contactNumber"
+                      name="number"
                       placeholder="Enter your number"
                       className="form-control form-control-lg"
                       onChange={handleContactNumberChange}
@@ -215,7 +196,7 @@ export const Registration = () => {
                       name="confirmPassword"
                       placeholder="Confirm your password"
                       className="form-control form-control-lg"
-                    //onChange={handleConfirmPasswordChange}
+                      //onChange={handleConfirmPasswordChange}
                     />
                     <p
                       id="confirmPasswordError"
