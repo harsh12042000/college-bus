@@ -1,14 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StudentDetails = () => {
   const [studentData, setStudentData] = useState([]);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-  const deleteHandler = async (studentId) => {
+  const deleteHandler = async(studentId) => {
     try {
-      await axios.delete(`http://localhost:9091/delete-student?student_id=${studentId}`);
+      // console.log(studentId);
+      await axios.post('http://localhost:9091/delete-student', {
+        "student_id" : studentId
+      });
+      toast("Deleted Sucessfully !");
       fetchStudentDetails();
     } catch (error) {
       alert("Console Error");
@@ -54,7 +59,7 @@ const StudentDetails = () => {
           <tbody>
             {studentData.map((student) => {
               if (student) {
-                if (userInfo.checkAdmin === 1 && userInfo.standard !== null) {
+                if (student.checkAdmin === 0 && userInfo.checkAdmin === 1) {
                   return (
                     <tr key={student.student_id}>
                       <td>{student.student_id}</td>

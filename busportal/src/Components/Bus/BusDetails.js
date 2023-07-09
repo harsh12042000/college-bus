@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-console.log(userInfo);
+// console.log(userInfo.bus.bus_id);
 
 const BusDetails = () => {
   const [busData, setBusData] = useState([]);
@@ -64,6 +65,8 @@ const BusDetails = () => {
         updatedData
       );
 
+      toast("Details Updated !");
+
       window.location.href="/busdetails";
 
       if (response.status === 200) {
@@ -78,7 +81,8 @@ const BusDetails = () => {
         setShowModal(false);
       }
     } catch (error) {
-      alert("Console Error");
+      toast.error("Please Check all details");
+      // alert("Console Error");
       console.log(error);
     }
   };
@@ -86,6 +90,7 @@ const BusDetails = () => {
   return (
     <>
       <div className="container">
+        <h5>{userInfo.busId}</h5>
         <div className="text-center mt-5 mb-5">
           <h2>Bus Details</h2>
         </div>
@@ -130,7 +135,7 @@ const BusDetails = () => {
                       </button>
                     ) : (
                       <>
-                        {userInfo.busId !== null ? (
+                        {userInfo.PayFees === 1  ? (
                           <button disabled={true}>Already Booked</button>
                         ) : (
                           <button>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddDriver = () => {
   const [driverName, setDriverName] = useState("");
@@ -102,13 +103,16 @@ const AddDriver = () => {
           bus_id: busId
         }
       });
+
+      toast("Driver Successfully Added !");
     
       if (response !== null) {
         navigate("/admindashboard");
       }
     
     } catch (error) {
-      alert("Console Error!");
+      toast.error("Please Check all details");
+      // alert("Console Error!");
       console.error(error);
     }
     

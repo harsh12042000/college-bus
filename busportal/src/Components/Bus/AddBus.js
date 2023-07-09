@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddBus = () => {
   const [vehicleNumber, setVehicleNumber] = useState("");
@@ -74,11 +75,14 @@ const AddBus = () => {
         fees
       });
 
+      toast("Bus Successfully Added !")
+
       if(response != null) {
         navigate("/admindashboard");
       }
 
     } catch (error) {
+      toast.error("Please Check all details");
       console.error(error);
     }
   };

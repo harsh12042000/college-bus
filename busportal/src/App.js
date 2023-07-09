@@ -18,6 +18,8 @@ import Dashboard from "./Components/Admin/Dashboard";
 import Details from "./Components/Home/Details";
 import Booking from "./Components/Home/Booking";
 import PayFees from "./Components/Home/PayFees";
+import { ToastContainer, toast } from 'react-toastify';
+    import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
 
       </Routes>
       <Footer />
+      <ToastContainer />
     </BrowserRouter>
   );
 }

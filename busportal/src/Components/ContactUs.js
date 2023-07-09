@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaPhoneAlt, FaEnvelope, FaHeadset } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
   const [username, setUsername] = useState("");
@@ -70,6 +71,8 @@ const ContactUs = () => {
       setMessageErr("**Message should be atleast contain 5 words");
       return;
     }
+
+    toast.success("Email Sent ! Thank You for Contacting");
 
     setUsername("");
     setEmail("");

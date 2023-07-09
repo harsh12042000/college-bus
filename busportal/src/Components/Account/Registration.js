@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const Registration = () => {
 
@@ -122,6 +123,8 @@ export const Registration = () => {
         gender: selectedGender.value,
       });
 
+      toast.success("Registered !");
+
       if(response != null) {
         navigate("/login");
       }
@@ -131,6 +134,7 @@ export const Registration = () => {
       setPrn("");
       setGenderErr("");
     } catch (error) {
+      toast.error("Please Check Your PRN and all other details");
       console.error(error);
     }
   };

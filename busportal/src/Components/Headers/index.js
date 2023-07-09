@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Headers = () => {
-
   const signoutHandler = () => {
     localStorage.removeItem("userInfo");
     window.location.href = "/login";
@@ -25,7 +24,7 @@ const Headers = () => {
                   className="logo-img"
                   src={process.env.PUBLIC_URL + "/assets/images/C-DAC.png"}
                   alt="Banner"
-                  style={{height:"7vh", width:"6vw"}}
+                  style={{ height: "7vh", width: "6vw" }}
                 />
               </Link>
             </strong>
@@ -43,48 +42,85 @@ const Headers = () => {
           </button>
           <div className=" collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto justify-content-center align-items-center ">
+              {userInfo && userInfo.checkAdmin === 1 ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link mx-2 text-uppercase text-white"
+                    to="/admindashboard"
+                  >
+                    Admin Dashboard
+                  </Link>
+                </li>
+              ) : userInfo && userInfo.checkAdmin === 0 ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link mx-2 text-uppercase text-white"
+                    to="/details"
+                  >
+                    Student Dashboard
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link mx-2 text-uppercase active text-white"
+                    aria-current="page"
+                    to="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+              )}
+
               <li className="nav-item">
                 <Link
-                  className="nav-link mx-2 text-uppercase active text-white"
-                  aria-current="page"
-                  to="/"
+                  className="nav-link mx-2 text-uppercase text-white"
+                  to="/aboutus"
                 >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase text-white" to="/aboutus">
                   About Us
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase text-white" to="/contactus">
+                <Link
+                  className="nav-link mx-2 text-uppercase text-white"
+                  to="/contactus"
+                >
                   Contact Us
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase text-white" to="/instructions">
+                <Link
+                  className="nav-link mx-2 text-uppercase text-white"
+                  to="/instructions"
+                >
                   Instructions
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link mx-2 text-uppercase text-white" to="/register">
                   Register
                 </Link>
-              </li>
-              {
-                userInfo === null ? 
+              </li> */}
+              {userInfo === null ? (
                 <li className="nav-item">
-                <Link className="nav-link mx-2 text-uppercase text-white" to="/login">
-                  Login
-                </Link>
-              </li> :
-              <li className="nav-item">
-              <Link className="nav-link mx-2 text-uppercase text-white" to="#logout" onClick={signoutHandler}>
-                Logout
-              </Link>
-            </li>
-              }
+                  <Link
+                    className="nav-link mx-2 text-uppercase text-white"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link mx-2 text-uppercase text-white"
+                    to="#logout"
+                    onClick={signoutHandler}
+                  >
+                    Logout
+                  </Link>
+                </li>
+              )}
             </ul>
             <ul></ul>
             {/* <ul className="navbar-nav ms-auto ">

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import { toast } from "react-toastify";
+
 
 const Login = () => {
 
@@ -55,15 +57,17 @@ const Login = () => {
       setPrnErr("");
       setPasswordErr("");
       localStorage.setItem('userInfo', JSON.stringify(response.data));
+      // localStorage.setItem('booking', JSON.stringify(response.data.bus));
 
       if(response.data.checkAdmin === 1) {
-        // navigate("/admindashboard");
+        navigate("/admindashboard");
+        // toast("Admin Login Suceessfull !")
         window.location.href = "/admindashboard";
       } else if(response.data.checkAdmin === 0){
         // navigate(redirect || '/');
         window.location.href = "/details";
       } else {
-        alert("Sorry...Please Check Details!")
+        toast("Sorry...Please Check Details!")
       }
 
     } catch (error) {
@@ -139,14 +143,14 @@ const Login = () => {
                   </p>
                 </div>
                 <div>
-                  <div style={{ marginBottom: 10 }}>
+                  {/* <div style={{ marginBottom: 10 }}>
                     <input
                       type="checkbox"
                       name="Remember Me"
                       id="Remember Me"
                     />
                     <label htmlFor="Remember Me">Remember Me</label>
-                  </div>
+                  </div> */}
                   <div style={{ marginTop: 10 }}>
                     <button className="mt-2 btn btn-danger w-100" type="submit">
                       Log-in

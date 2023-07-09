@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DriverDetails = () => {
   const [driverData, setDriverData] = useState([]);
@@ -69,6 +70,9 @@ const DriverDetails = () => {
         "http://localhost:9091/update-driver",
         updatedData
       );
+
+      toast("Details Updated !");
+
       window.location.href = "/driverdetails"
       // setDriverData((prevData) =>
       //   prevData.map((driver) =>
@@ -88,7 +92,8 @@ const DriverDetails = () => {
       // });
       // setShowModal(false);
     } catch (error) {
-      alert("Console Error");
+      toast.error("Please Check all details");
+      // alert("Console Error");
       console.log(error);
     }
   };

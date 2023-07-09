@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function PayFees() {
   const [showPopup, setShowPopup] = useState(false); 
@@ -25,11 +26,12 @@ export default function PayFees() {
         updatedData
       );
   
-      userInfo.busId = busId;
       userInfo.PayFees = 1;
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
-  
-      window.location.href = "/busdetails";
+
+      toast("Payment Successful !");
+      navigate("/busdetails")
+      // window.location.href = "/busdetails";
     //   setShowPopup(true);
     } catch (error) {
       alert("Console Error");
