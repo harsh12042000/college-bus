@@ -9,6 +9,8 @@ export const Registration = () => {
   const [contactNumberErr, setContactNumberErr] = useState("");
   const [genderErr, setGenderErr] = useState("");
   const [standardErr, setStandardErr] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
 
   const handleUserNameChange = (event) => {
     const inputValue = event.target.value;
@@ -24,6 +26,11 @@ export const Registration = () => {
     const inputValue = event.target.value;
     setprn(inputValue);
     setprnErr("");
+  };
+  const handlePasswordChange = (event) => {
+    const inputValue = event.target.value;
+    setPassword(inputValue);
+    setPasswordErr("");
   };
 
   const handleSubmit = (event) => {
@@ -59,7 +66,14 @@ export const Registration = () => {
       setContactNumberErr("**Enter valid phone no");
       return;
     }
-
+    if (password == "") {
+      setPasswordErr("**Password field should not be empty");
+      return;
+    }
+    if (password.length < 10 || password.length > 15) {
+      setPasswordErr("**Password length be between 10 to 15");
+      return;
+    }
     const genderInputs = document.getElementsByName("gender");
     let selectedGender = "";
     for (let i = 0; i < genderInputs.length; i++) {
@@ -140,8 +154,18 @@ export const Registration = () => {
                       name="password"
                       placeholder="Enter your password"
                       className="form-control form-control-lg"
-                    //onChange={handlePasswordChange}
+
+                    onChange={handlePasswordChange}
+
                     />
+                    {passwordErr && (
+                      <div
+                        className=""
+                        style={{ color: "red", fontWeight: "bold" }}
+                      >
+                        {passwordErr}
+                      </div>
+                    )}
                     <div
                       id="passwordError"
                       style={{ color: "red", display: "none" }}
