@@ -29,7 +29,8 @@ export default function PayFees() {
       userInfo.PayFees = 1;
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
   
-      setShowPopup(true);
+      window.location.href = "/busdetails";
+    //   setShowPopup(true);
     } catch (error) {
       alert("Console Error");
       console.log(error);

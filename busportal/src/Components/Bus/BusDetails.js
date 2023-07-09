@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
+console.log(userInfo);
+
 const BusDetails = () => {
   const [busData, setBusData] = useState([]);
   const [editBus, setEditBus] = useState(null);
@@ -61,6 +63,8 @@ const BusDetails = () => {
         "http://localhost:9091/update-bus",
         updatedData
       );
+
+      window.location.href="/busdetails";
 
       if (response.status === 200) {
         fetchBusDetails();

@@ -54,7 +54,7 @@ const StudentDetails = () => {
           <tbody>
             {studentData.map((student) => {
               if (student) {
-                if (userInfo.checkAdmin === 1) {
+                if (userInfo.checkAdmin === 1 && userInfo.standard !== null) {
                   return (
                     <tr key={student.student_id}>
                       <td>{student.student_id}</td>
@@ -78,7 +78,7 @@ const StudentDetails = () => {
                     </tr>
                   );
                 }
-                if (student.student_id === userInfo.student_id) {
+                if (student.student_id === userInfo.student_id && userInfo.standard !== null) {
                   return (
                     <tr key={student.student_id}>
                       <td>{student.student_id}</td>
