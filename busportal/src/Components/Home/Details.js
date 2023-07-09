@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Details() {
-    const navigate = useNavigate();
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo == null || userInfo != null && userInfo.checkAdmin == 1) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
+
+    // const navigate = useNavigate();
   return (
     <>
      <div className="container">
