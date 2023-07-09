@@ -49,7 +49,7 @@ export const Registration = () => {
     setPrnErr("");
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     
     if (userName === "") {
@@ -220,7 +220,7 @@ export const Registration = () => {
                     <input
                       type="tel"
                       id="phone-input"
-                      name="contactNumber"
+                      name="number"
                       placeholder="Enter your number"
                       className="form-control form-control-lg"
                       onChange={handleContactNumberChange}

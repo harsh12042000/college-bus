@@ -15,6 +15,9 @@ import ContactUs from "./Components/ContactUs";
 import AboutUs from "./Components/AboutUs";
 import { Instrctions } from "./Components/Instructions";
 import Dashboard from "./Components/Admin/Dashboard";
+import Details from "./Components/Home/Details";
+import Booking from "./Components/Home/Booking";
+import PayFees from "./Components/Home/PayFees";
 
 function App() {
   return (
@@ -33,6 +36,10 @@ function App() {
         <Route path="/AboutUs" element={<AboutUs />}></Route>
         <Route path="/instructions" element={<Instrctions/>}></Route>
         <Route path="/admindashboard" element={<Dashboard/>}></Route>
+        <Route path="/details" element={<Details/>}></Route>
+        <Route path="/Booking" element={<Booking/>}></Route>
+        <Route path="/PayFees" element={<PayFees/>}></Route>
+
       </Routes>
       <Footer />
     </BrowserRouter>

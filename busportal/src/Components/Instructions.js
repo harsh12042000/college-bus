@@ -8,7 +8,7 @@ export const Instrctions = () => {
       </div>
       <div className="row mt-4">
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Seatbelts</h5>
               <p className="card-text">
@@ -19,7 +19,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Emergency Exits</h5>
               <p className="card-text">
@@ -31,7 +31,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Driver Training and Licensing</h5>
               <p className="card-text">
@@ -43,7 +43,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Speed Limits and Traffic Rules</h5>
               <p className="card-text">
@@ -55,7 +55,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Regular Vehicle Maintenance</h5>
               <p className="card-text">
@@ -67,7 +67,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Weather Conditions</h5>
               <p className="card-text">
@@ -79,7 +79,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">No Overcrowding</h5>
               <p className="card-text">
@@ -91,7 +91,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">
                 First Aid Kit and Emergency Equipment
@@ -105,7 +105,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Driver Rest and Breaks</h5>
               <p className="card-text">
@@ -117,7 +117,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Communication and Reporting</h5>
               <p className="card-text">
@@ -130,7 +130,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">
                 Anti-Bullying and Harassment Policy
@@ -144,7 +144,7 @@ export const Instrctions = () => {
           </div>
         </div>
         <div className="col-md-4 mb-4">
-          <div className="card h-100">
+          <div className="card h-100 shadow-lg p-1 mb-3 bg-white rounded">
             <div className="card-body">
               <h5 className="card-title">Security Measures</h5>
               <p className="card-text">
