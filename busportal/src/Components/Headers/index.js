@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Headers = () => {
+
+  const signoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    window.location.href = "/login";
+  };
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <>
       <nav
@@ -63,11 +71,19 @@ const Headers = () => {
                   Register
                 </Link>
               </li>
-              <li className="nav-item">
+              {
+                userInfo === null ? 
+                <li className="nav-item">
                 <Link className="nav-link mx-2 text-uppercase text-white" to="/login">
                   Login
                 </Link>
-              </li>
+              </li> :
+              <li className="nav-item">
+              <Link className="nav-link mx-2 text-uppercase text-white" to="#logout" onClick={signoutHandler}>
+                Logout
+              </Link>
+            </li>
+              }
             </ul>
             <ul></ul>
             {/* <ul className="navbar-nav ms-auto ">

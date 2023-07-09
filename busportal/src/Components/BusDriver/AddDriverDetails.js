@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddDriver = () => {
   const [driverName, setDriverName] = useState("");
@@ -11,6 +13,15 @@ const AddDriver = () => {
   const [driverAgeErr, setDriverAgeErr] = useState("");
   const [busId, setBusId] = useState("");
   const [busIdErr, setBusIdErr] = useState("");
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo == null || userInfo != null && userInfo.checkAdmin == 0) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   const handleDriverName = (event) => {
     const inputValue = event.target.value;
@@ -42,7 +53,7 @@ const AddDriver = () => {
     setBusIdErr("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (driverName === "" || !isNaN(driverName)) {
@@ -79,6 +90,28 @@ const AddDriver = () => {
       setBusIdErr("**Enter valid bus Id");
       return;
     }
+
+
+    try {
+      const response = await axios.post("http://localhost:9091/add-driver", {
+        driverName,
+        driverNumber: contactNumber,
+        license,
+        driverAge,
+        bus: {
+          bus_id: busId
+        }
+      });
+    
+      if (response !== null) {
+        navigate("/admindashboard");
+      }
+    
+    } catch (error) {
+      alert("Console Error!");
+      console.error(error);
+    }
+    
   };
 
   return (

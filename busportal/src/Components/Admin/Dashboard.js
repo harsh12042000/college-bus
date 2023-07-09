@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+  useEffect(() => {
+    if (userInfo == null || userInfo != null && userInfo.checkAdmin == 0) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   return (
     <>

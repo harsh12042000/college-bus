@@ -1,122 +1,144 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const Registration = () => {
-  const [username, setUsername] = useState("");
-  const [usernameErr, setUsernameErr] = useState("");
-  const [prn, setprn] = useState("");
-  const [prnErr, setprnErr] = useState("");
+
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = useState("");
+  const [userNameErr, setUserNameErr] = useState("");
+  const [prn, setPrn] = useState("");
+  const [prnErr, setPrnErr] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [contactNumberErr, setContactNumberErr] = useState("");
   const [genderErr, setGenderErr] = useState("");
   const [standardErr, setStandardErr] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordErr, setPasswordErr] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const handleUserNameChange = (event) => {
     const inputValue = event.target.value;
-    setUsername(inputValue);
-    setUsernameErr("");
+    setUserName(inputValue);
+    setUserNameErr("");
   };
+
+  const handlePasswordChange = (event) => {
+    const inputValue = event.target.value;
+    setPassword(inputValue);
+    setPasswordError("");
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    const inputValue = event.target.value;
+    setConfirmPassword(inputValue);
+    setConfirmPasswordError("");
+  };
+
   const handleContactNumberChange = (event) => {
     const inputValue = event.target.value;
     setContactNumber(inputValue);
     setContactNumberErr("");
   };
-  const handleprnChange = (event) => {
+
+  const handlePrnChange = (event) => {
     const inputValue = event.target.value;
-    setprn(inputValue);
-    setprnErr("");
-  };
-  const handlePasswordChange = (event) => {
-    const inputValue = event.target.value;
-    setPassword(inputValue);
-    setPasswordErr("");
+    setPrn(inputValue);
+    setPrnErr("");
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (username == "") {
-      setUsernameErr("**Name field should not be empty");
+    
+    if (userName === "") {
+      setUserNameErr("**Name field should not be empty");
       return;
     }
-    if (!isNaN(username)) {
-      setUsernameErr("**Name should not be numeric");
+
+    if (!isNaN(userName)) {
+      setUserNameErr("**Name should not be numeric");
       return;
     }
-    if (prn == "" || prn.length < 10 || prn.length > 10 || isNaN(prn)) {
-      setprnErr("**Enter valid PRN");
+
+    if (prn === "" || prn.length !== 10 || isNaN(prn)) {
+      setPrnErr("**Enter a valid PRN");
       return;
     }
-    const standardSelect = document.getElementById("standardSelect");
-    const selectedStandard = standardSelect.value;
+
+    const standard = document.getElementById("standard");
+    const selectedStandard = standard.value;
 
     if (selectedStandard === "") {
       setStandardErr("**Please select your Standard");
       return;
     }
-    if (contactNumber == "") {
-      setContactNumberErr("**Phone No field should not be Empty");
+
+    if (contactNumber === "") {
+      setContactNumberErr("**Phone No field should not be empty");
       return;
     }
+
     if (isNaN(contactNumber)) {
-      setContactNumberErr("**Enter valid phone no");
+      setContactNumberErr("**Enter a valid phone number");
       return;
     }
-    if (contactNumber.length < 10) {
-      setContactNumberErr("**Enter valid phone no");
+
+    if (contactNumber.length !== 10) {
+      setContactNumberErr("**Enter a valid phone number");
       return;
     }
-    if (password == "") {
-      setPasswordErr("**Password field should not be empty");
-      return;
-    }
-    if (password.length < 10 || password.length > 15) {
-      setPasswordErr("**Password length be between 10 to 15");
-      return;
-    }
-    const genderInputs = document.getElementsByName("gender");
-    let selectedGender = "";
-    for (let i = 0; i < genderInputs.length; i++) {
-      if (genderInputs[i].checked) {
-        selectedGender = genderInputs[i].value;
-        break;
-      }
-    }
-    if (selectedGender === "") {
+
+    const selectedGender = document.querySelector('input[name="gender"]:checked');
+
+    if (!selectedGender) {
       setGenderErr("**Please select a gender");
       return;
     }
 
-    setContactNumber = "";
-    setUsername = "";
-    setprn = "";
+    if (password === "") {
+      setPasswordError("**Password field should not be empty");
+      return;
+    }
 
-    // try {
-    //   const response = await axios.post("YOUR_API_ENDPOINT", {
-    //     username,
-    //     prn,
-    //     contactNumber,
-    //     // Include other data to send to the API
-    //   });
+    if (password.length < 6) {
+      setPasswordError("**Password should be at least 6 characters long");
+      return;
+    }
 
-    //   console.log(response.data); 
-  
-    //   // Reset form fields
-    //   setContactNumber("");
-    //   setUsername("");
-    //   setprn("");
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("**Passwords do not match");
+      return;
+    }
 
+    try {
+      const response = await axios.post("http://localhost:9091/add-student", {
+        prn,
+        userName,
+        contactNumber,
+        standard: selectedStandard,
+        password,
+        gender: selectedGender.value,
+      });
+
+      if(response != null) {
+        navigate("/login");
+      }
+
+      setContactNumber("");
+      setUserName("");
+      setPrn("");
+      setGenderErr("");
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
     <>
       <div className="container">
-        <div
-          className="account-pages row d-flex flex-column justify-content-center align-items-center mt-5"
-          style={{ height: "100vh" }}
-        >
+        <div className="account-pages row d-flex flex-column justify-content-center align-items-center mt-5" style={{ height: "100vh" }}>
           <div className="shadow p-5 mb-5 bg-white rounded col-sm-12 col-md-6">
             <h1 className="text-danger" style={{ marginLeft: "30%" }}>
               REGISTRATION
@@ -134,12 +156,9 @@ export const Registration = () => {
                       className="form-control form-control-lg"
                       onChange={handleUserNameChange}
                     />
-                    {usernameErr && (
-                      <div
-                        className="mt"
-                        style={{ color: "red", fontWeight: "bold" }}
-                      >
-                        {usernameErr}
+                    {userNameErr && (
+                      <div className="mt" style={{ color: "red", fontWeight: "bold" }}>
+                        {userNameErr}
                       </div>
                     )}
                   </div>
@@ -148,7 +167,7 @@ export const Registration = () => {
                       <h5 className="mt-4">STANDARD</h5>
                       <select
                         name="standard"
-                        id="standardSelect"
+                        id="standard"
                         className="form-control form-control-lg"
                       >
                         <option value="">Select your Standard</option>
@@ -156,10 +175,7 @@ export const Registration = () => {
                         <option value="PG-DBDA">PG-DBDA</option>
                       </select>
                       {standardErr && (
-                        <div
-                          className=""
-                          style={{ color: "red", fontWeight: "bold" }}
-                        >
+                        <div className="" style={{ color: "red", fontWeight: "bold" }}>
                           {standardErr}
                         </div>
                       )}
@@ -173,24 +189,14 @@ export const Registration = () => {
                       name="password"
                       placeholder="Enter your password"
                       className="form-control form-control-lg"
-
-                    onChange={handlePasswordChange}
-
+                      value={password}
+                      onChange={handlePasswordChange}
                     />
-                    {passwordErr && (
-                      <div
-                        className=""
-                        style={{ color: "red", fontWeight: "bold" }}
-                      >
-                        {passwordErr}
+                    {passwordError && (
+                      <div className="mt" style={{ color: "red", fontWeight: "bold" }}>
+                        {passwordError}
                       </div>
                     )}
-                    <div
-                      id="passwordError"
-                      style={{ color: "red", display: "none" }}
-                    >
-                      Invalid password
-                    </div>
                   </div>
                 </div>
                 <div className="ms-2" style={{ flex: 1 }}>
@@ -201,13 +207,10 @@ export const Registration = () => {
                       name="prn"
                       placeholder="Enter your PRN"
                       className="form-control form-control-lg"
-                      onChange={handleprnChange}
+                      onChange={handlePrnChange}
                     />
                     {prnErr && (
-                      <div
-                        className="mt"
-                        style={{ color: "red", fontWeight: "bold" }}
-                      >
+                      <div className="mt" style={{ color: "red", fontWeight: "bold" }}>
                         {prnErr}
                       </div>
                     )}
@@ -223,10 +226,7 @@ export const Registration = () => {
                       onChange={handleContactNumberChange}
                     />
                     {contactNumberErr && (
-                      <div
-                        className=""
-                        style={{ color: "red", fontWeight: "bold" }}
-                      >
+                      <div className="" style={{ color: "red", fontWeight: "bold" }}>
                         {contactNumberErr}
                       </div>
                     )}
@@ -239,14 +239,14 @@ export const Registration = () => {
                       name="confirmPassword"
                       placeholder="Confirm your password"
                       className="form-control form-control-lg"
-                    //onChange={handleConfirmPasswordChange}
+                      value={confirmPassword}
+                      onChange={handleConfirmPasswordChange}
                     />
-                    <p
-                      id="confirmPasswordError"
-                      style={{ color: "red", display: "none" }}
-                    >
-                      Passwords do not match
-                    </p>
+                    {confirmPasswordError && (
+                      <div className="mt" style={{ color: "red", fontWeight: "bold" }}>
+                        {confirmPasswordError}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -254,35 +254,17 @@ export const Registration = () => {
                 <div className="fs-5 fw-medium" style={{ flex: 1 }}>
                   Gender
                 </div>
-                <div
-                  className="fw-semibold d-flex"
-                  style={{ justifyContent: "space-evenly", flex: 3 }}
-                >
+                <div className="fw-semibold d-flex" style={{ justifyContent: "space-evenly", flex: 3 }}>
                   <div>
-                    <input
-                      type="radio"
-                      name="gender"
-                      defaultValue="male"
-                      id={1}
-                    />
+                    <input type="radio" name="gender" value="male" id={1} />
                     Male
                   </div>
                   <div>
-                    <input
-                      type="radio"
-                      name="gender"
-                      defaultValue="female"
-                      id={2}
-                    />
+                    <input type="radio" name="gender" value="female" id={2} />
                     Female
                   </div>
                   <div>
-                    <input
-                      type="radio"
-                      name="gender"
-                      defaultValue="nottosay"
-                      id={3}
-                    />
+                    <input type="radio" name="gender" value="nottosay" id={3} />
                     Prefer not to say
                   </div>
                 </div>

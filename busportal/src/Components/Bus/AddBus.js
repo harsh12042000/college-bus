@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddBus = () => {
   const [vehicleNumber, setVehicleNumber] = useState("");
@@ -9,6 +11,16 @@ const AddBus = () => {
   const [sourceErr, setSourceErr] = useState("");
   const [fees, setFees] = useState("");
   const [feesErr, setFeesErr] = useState("");
+
+  const navigate = useNavigate();
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+  useEffect(() => {
+    if (userInfo == null || userInfo != null && userInfo.checkAdmin == 0) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
 
   const handleVehicleNumber = (event) => {
     const inputValue = event.target.value;
@@ -34,7 +46,7 @@ const AddBus = () => {
     setFeesErr("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (vehicleNumber === "") {
@@ -52,6 +64,22 @@ const AddBus = () => {
     if (fees === "" || isNaN(fees)) {
       setFeesErr("**Please enter valid fees");
       return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:9091/add-bus", {
+        vehicleNumber,
+        seatCapacity,
+        source,
+        fees
+      });
+
+      if(response != null) {
+        navigate("/admindashboard");
+      }
+
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -109,9 +137,9 @@ const AddBus = () => {
                   onChange={handleSource}
                 >
                   <option value="">Select Source</option>
-                  <option value="Source 1">MGM Hospital</option>
-                  <option value="Source 2">Kamothe</option>
-                  <option value="Source 3">Padeghar</option>
+                  <option value="MGM Hospital">MGM Hospital</option>
+                  <option value="Kamothe">Kamothe</option>
+                  <option value="Padeghar">Padeghar</option>
                 </select>
                 {sourceErr && (
                   <div

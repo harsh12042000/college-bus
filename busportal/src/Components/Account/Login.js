@@ -1,7 +1,24 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 const Login = () => {
+
+  const navigate = useNavigate();
+  const userInfo = localStorage.getItem("userInfo");
+
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
+
+
   const [prn, setPrn] = useState("");
   const [prnErr, setPrnErr] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +35,7 @@ const Login = () => {
     setPasswordErr("");
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async(event) => {
     event.preventDefault();
     if (prn === "" || prn.length !== 10 || isNaN(prn)) {
       setPrnErr("**Enter a valid PRN");
@@ -28,7 +45,31 @@ const Login = () => {
       setPasswordErr("**Enter valid Password");
       return;
     }
-    // Perform login logic here
+    
+    try {
+      const response = await axios.post("http://localhost:9091/login", {
+        prn,
+        password
+      });
+
+      setPrnErr("");
+      setPasswordErr("");
+      localStorage.setItem('userInfo', JSON.stringify(response.data));
+
+      if(response.data.checkAdmin === 1) {
+        // navigate("/admindashboard");
+        window.location.href = "/admindashboard";
+      } else if(response.data.checkAdmin === 0){
+        // navigate(redirect || '/');
+        window.location.href = "/";
+      } else {
+        alert("Sorry...Please Check Details!")
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+
   };
 
   return (
@@ -61,7 +102,7 @@ const Login = () => {
                   <input
                     type="text"
                     name="prn"
-                    placeholder="Enter your PRN"
+                    placeholder="Enter Your PRN/Service Number"
                     className="form-control form-control-lg"
                     onChange={handlePrnChange}
                   />
@@ -76,9 +117,9 @@ const Login = () => {
                 </div>
                 <div style={{ marginBottom: 10 }}>
                   <input
-                    type="text"
+                    type="password"
                     name="password"
-                    placeholder="Enter your Password"
+                    placeholder="Enter Your Password"
                     className="form-control form-control-lg"
                     onChange={handlePasswordChange}
                   />
