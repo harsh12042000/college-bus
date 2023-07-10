@@ -91,13 +91,13 @@ export const Footer = () => {
         { /* Section: Social media */}
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           { /* Left */}
-          <div className="me-5 d-none d-lg-block">
+          {/* <div className="me-5 d-none d-lg-block">
             <b><span>Get connected with us on social networks:</span></b>
-          </div>
+          </div> */}
           { /* Left */}
 
           { /* Right */}
-          <div>
+          {/* <div>
             <a href="https://www.facebook.com" target="_blank" className="me-4 text-reset">
               <i className="fab fa-facebook-f" />
             </a>
@@ -116,7 +116,7 @@ export const Footer = () => {
             <a href="https://github.com/" target="_blank" className="me-4 text-reset">
               <i className="fab fa-github" />
             </a>
-          </div>
+          </div> */}
           { /* Right */}
         </section>
         { /* Section: Social media */}
