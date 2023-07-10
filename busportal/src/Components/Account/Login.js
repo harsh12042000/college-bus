@@ -60,13 +60,13 @@ const Login = () => {
       // localStorage.setItem('booking', JSON.stringify(response.data.bus));
 
       if(response.data.checkAdmin === 1) {
-        navigate("/admindashboard");
+        // navigate("/admindashboard");
         // toast("Admin Login Suceessfull !")
-        // window.location.href = "/admindashboard";
+        window.location.href = "/admindashboard";
       } else if(response.data.checkAdmin === 0){
         // navigate(redirect || '/');
-        // window.location.href = "/details";
-        navigate("/details")
+        window.location.href = "/details";
+        // navigate("/details")
       } else {
         toast("Sorry...Please Check Details!")
       }

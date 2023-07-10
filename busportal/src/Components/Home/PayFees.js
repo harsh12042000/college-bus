@@ -30,8 +30,8 @@ export default function PayFees() {
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
       toast("Payment Successful !");
-      navigate("/busdetails")
-      // window.location.href = "/busdetails";
+      // navigate("/busdetails")
+      window.location.href = "/busdetails";
     //   setShowPopup(true);
     } catch (error) {
       alert("Console Error");

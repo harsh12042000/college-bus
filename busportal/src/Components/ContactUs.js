@@ -81,7 +81,7 @@ const ContactUs = () => {
   };
 
   return (
-    <>
+    <div className="container">
       <div className="row justify-content-center align-items-center mt-5">
         <div
           style={{ marginLeft: "20px" }}
@@ -148,9 +148,9 @@ const ContactUs = () => {
               </p>
             )}
             <button
-              style={{ backgroundColor: "orange", color: "white" }}
+              style={{ margin: "0 42% 0 42%" }}
               type="submit"
-              className="rounded-2 p-2 mt-4"
+              className="rounded-2 p-2 mt-4 btn btn-danger"
             >
               Submit
             </button>
@@ -190,7 +190,7 @@ const ContactUs = () => {
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
